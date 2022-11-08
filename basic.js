@@ -37,10 +37,23 @@ function getRate() {
 console.log("rate is", getRate()); // 6
 
 // let
-// 不存在变量提升
-// let不允许在相同作用域中重复声明
+// 1. 不存在变量提升
+// 2. let不允许在相同作用域中重复声明
+// 3. 块级作用域：只在作用域内有效
+// 4. 不影响作用域链
+{ 
+  let school = 'yume'
+  function fn(){
+    console.log(school)
+  }
+  fn()
+}
+
+
 console.log(a) // 报错ReferenceError
 let a = 2
+let b, c, d, e, f
+
 
 // const 
 // const声明一个只读的常量，一旦声明，常量的值就不能改变
@@ -57,3 +70,17 @@ const num = [1,2,3]
 num.push(0)
 console.log(num)
 console.log(user)
+
+
+// 基本：对象赋值方式
+// 1
+const test = {name: 'test', age: 34}
+test.fn = 'functions'
+console.log(test)
+
+// 2
+const fn2 ={
+    address: 'address'
+}
+test[fn2.address] = 'xx'
+console.log(test)

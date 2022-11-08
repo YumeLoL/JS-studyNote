@@ -20,7 +20,7 @@ countNumber.increment()
 countNumber.increment()
 countNumber.getValue()
 
-countNumber = null
+// countNumber = null
 
 // 讲解 ：https://www.youtube.com/watch?v=ono4n3eHY24&list=PLmOn9nNkQxJH3g-GPoyAj2IB6bQ-qOeKl&index=31
 // 1. 如何产生闭包？
