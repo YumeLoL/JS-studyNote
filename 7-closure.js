@@ -1,34 +1,26 @@
 // create a counter function which has increment and getValue functionality
+const counter = () =>{
+    let count = 0;
 
-const privateCounter = () => {
-  let count = 0;
+    const increment = () => count++;
 
-  const increment = () => {
-    count++;
-  };
-  const getValue = () => {
-    return count;
-  };
+    const getValue = () => {
+        console.log(count)
+    }
 
-  return {
-    increment,
-    getValue
-  };
-};
+    return {
+        increment,
+        getValue
+    }
+}
 
-let test = privateCounter();
-test.increment();
-test.increment();
-console.log(test.getValue);
-test = null;
+const countNumber = counter()
+countNumber.increment()
+countNumber.increment()
+countNumber.increment()
+countNumber.getValue()
 
-const privateSecret = () => {
-  const secret = "foo";
-
-  return () => secret;
-};
-const getSecret = privateSecret();
-console.log(getSecret());
+countNumber = null
 
 // 讲解 ：https://www.youtube.com/watch?v=ono4n3eHY24&list=PLmOn9nNkQxJH3g-GPoyAj2IB6bQ-qOeKl&index=31
 // 1. 如何产生闭包？
@@ -54,46 +46,46 @@ console.log(getSecret());
 
 // example 1. 将函数作为另一个函数的返回值
 function fn1() {
-  var a = 2;
-  function fn2() {
-    a++;
-    // console.log("a:", a);
+    var a = 2;
+    function fn2() {
+      a++;
+      // console.log("a:", a);
+    }
+    return fn2;
   }
-  return fn2;
-}
-var f = fn1();
-f();
-f();
-var g = fn1();
-g();
-g();
-g();
-// 外部函数 fn1 调用几次，就产生几次闭包。一次闭包，内部函数调用时，数据不释放，所以 a 的值增加了
-
-// example 2. 将函数作为实参传递给另一个函数调用
-function showDelay(msg, time) {
-  // msg 是外部函数实参
-  setTimeout(function () {
-    alert(msg); // 内部函数调用外部函数的 msg， 产生闭包
-  }, time);
-}
-// showDelay("alert", 2000);
-
-// example 3.
-function ex1() {
-  var b = 5;
-  function ex2() {
-    b--;
-    // console.log("b:", b);
+  var f = fn1();
+  f();
+  f();
+  var g = fn1();
+  g();
+  g();
+  g();
+  // 外部函数 fn1 调用几次，就产生几次闭包。一次闭包，内部函数调用时，数据不释放，所以 a 的值增加了
+  
+  // example 2. 将函数作为实参传递给另一个函数调用
+  function showDelay(msg, time) {
+    // msg 是外部函数实参
+    setTimeout(function () {
+      alert(msg); // 内部函数调用外部函数的 msg， 产生闭包
+    }, time);
   }
-
-  function ex3() {
-    b++;
-    // console.log("b:", b);
+  // showDelay("alert", 2000);
+  
+  // example 3.
+  function ex1() {
+    var b = 5;
+    function ex2() {
+      b--;
+      // console.log("b:", b);
+    }
+  
+    function ex3() {
+      b++;
+      // console.log("b:", b);
+    }
+    return ex3;
   }
-  return ex3;
-}
-var ex = ex1(); // var ex = ex1() 引用指向了 ex3, 因此内部的局部变量仍然存在
-ex(); // 如果只是执行 ex1() 没有指向，函数执行一次之后就不存在了
-ex();
-ex = null; //闭包死亡（包含闭包的函数对象成为了垃圾对象）
+  var ex = ex1(); // var ex = ex1() 引用指向了 ex3, 因此内部的局部变量仍然存在
+  ex(); // 如果只是执行 ex1() 没有指向，函数执行一次之后就不存在了
+  ex();
+  ex = null; //闭包死亡（包含闭包的函数对象成为了垃圾对象）
