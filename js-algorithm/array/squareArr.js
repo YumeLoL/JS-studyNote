@@ -14,7 +14,7 @@
 var nums = [-4,-1,0,3,10]
 
 function getSquares(nums) {
-    let newArray = [];
+    let newArray = new Array(nums.length).fill(0);
     let i = 0, j = k = nums.length - 1
 
     // i,j向中间移动，所以要保证 i <= j 
