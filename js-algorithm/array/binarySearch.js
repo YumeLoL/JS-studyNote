@@ -47,3 +47,7 @@ var search = function (nums, target) {
 console.log(search(nums, target));
 
 // https://github.com/youngyangyang04/leetcode-master/blob/master/problems/0704.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.md
+// 35.搜索插入位置
+// 34.在排序数组中查找元素的第一个和最后一个位置
+// 69.x 的平方根
+// 367.有效的完全平方数
