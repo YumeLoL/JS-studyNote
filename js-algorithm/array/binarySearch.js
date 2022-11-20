@@ -8,46 +8,126 @@
 
 // 二分法查找的条件： 有序的（升序）整型数组，且数组中无重复元素
 // 思路：
-//      1. 两个指针 left right 指向数字头尾， left = 0, right = arr.length - 1
-//      2. 中间数 mid =
+//      1. 获取中间数的index值，mid = Math.floor( 两边指针和 / 2)
+//         left = 0,
+//         right = nums.length; 两边指针
+//      2  while(left < right) 循环查找，当left=right时，由于nums[right]不在查找范围，所以不必包括此情况
 
-var target = 45;
+var target = 9;
 //           0  1  2  3  4  5   6   7   8   9
 var nums = [-1, 0, 3, 5, 9, 12, 33, 45, 46, 67];
-//  mid                     5
-//  mid                                 8
-//  mind                            7
+//  mid
+//  mid                                 
+//  mid                             
 
 //   左闭右闭区间 [left, right)
 var search = function (nums, target) {
-  // right是数组最后一个数的下标+1，nums[right]不在查找范围内，是左闭右开区间
   let mid,
     left = 0,
     right = nums.length; // 10
 
-  // 当left=right时，由于nums[right]在查找范围内，所以要包括此情况
-  while (left < right) {
+  // 当 left < right 时，
+  while (left <= right) {
     mid = Math.floor((left + right) / 2);
     console.log("mid", mid);
 
-    // 如果中间值大于目标值，中间值不应在下次查找的范围内，但中间值的前一个值应在；
-    // 由于right本来就不在查找范围内，所以将右边界更新为中间值，如果更新右边界为mid-1则将中间值的前一个值也踢出了下次寻找范围
     if (nums[mid] > target) {
-      right = mid; // 去左面闭区间寻找
+      right = mid - 1; // 去左面闭区间寻找
     } else if (nums[mid] < target) {
       left = mid + 1; // 去右面闭区间寻找
     } else {
-      return mid;
+      return mid; // nums[mid] 等于 target， 所以返回 mid 值
     }
   }
 
   return -1;
 };
 
-console.log(search(nums, target));
+console.log("Q704. Binary search:",search(nums, target));
+
+
+
 
 // https://github.com/youngyangyang04/leetcode-master/blob/master/problems/0704.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.md
+
 // 35.搜索插入位置
+var arr = [0, 3, 5, 9, 12],
+  target = -16; // length 6
+
+var search = function (nums, target) {
+  let left = 0,
+    right = nums.length;
+  let index;
+
+  while (left < right) {
+    index = Math.floor((left + right) / 2);
+
+    if (nums[index] < target) {
+      left = index + 1;
+    } else if (nums[index] > target) {
+      right = index;
+    } else {
+      return index;
+    }
+  }
+
+  // 目标值在数组所有元素之前 [0,0)
+  // 目标值插入数组中的位置 [left, right) ，return right 即可
+  // 目标值在数组所有元素之后的情况 [left, right)，因为是右开区间，所以 return right
+  return right; // 只有最后这里不一样
+};
+
+console.log("Q35. result:", search(arr, target));
+
+
 // 34.在排序数组中查找元素的第一个和最后一个位置
-// 69.x 的平方根
+
+// 69. x 的平方根
+var mySqrt = function(num) {
+  let start = 0;
+  let end = num; 
+  let mid = 0;
+
+  while(start <= end) {
+      mid = Math.floor((start + end)/2)  
+      if(mid * mid === num) return mid; 
+      else if(mid *mid > num) {
+          end = mid - 1                
+      } else if(mid * mid < num) {
+          start = mid + 1;               
+      }
+  }
+
+  return mid *mid > num ? mid - 1 : mid 
+};
+
+console.log('Q69. square root is:',mySqrt(36))
+
+
 // 367.有效的完全平方数
+var isPerfectSquare = function(num) {
+  let left = 1;
+  let right = num;
+  let result = false;
+  
+  while(left <= right){
+      let middle = Math.floor((left + right)/2)
+      
+      let sqr = middle * middle;
+      
+      if(sqr === num){
+          result = true;
+          return result;
+      }
+      
+      if(sqr > num){
+          right = middle -1;
+      }
+      
+      if(sqr < num){
+          left = middle + 1;
+      }
+  }
+  
+  return result;
+};
