@@ -16,15 +16,28 @@ var target = 19, nums = [2,3,1,2,4,3]
 
 var minSubArrLen = function(target, nums) {
     let left = right = sum = 0;
-    let maxLen = nums.length + 1   // 子数组最大长度不会超过自身
+
+    // 初始化最大长度等于自身+1
+    // 如果找不到满足条件的长度，while循环就不会执行且maxLen初始值不会改变
+    // 最后判断初始值 maxLen > nums.length ? 0 : maxLen
+    let maxLen = nums.length + 1   
 
     for(right = 0; right < nums.length; right++) {
         sum += nums[right];
 
-        while(sum >= target){
-            maxLen = Math.min(maxLen, right - left + 1)
-            sum = sum - nums[left]
+        // 当sum大于等于target时
+        // 1.取满足条件的长度 maxLen = right - left + 1
+        // 2.left++，让left指针向右移动，查看此时的sum和是否还大于等于target
+        // 3.此时，sum的值等于sum-nums[left]
+        // 4.如果sum还满足条件，继续循环。否，跳出循环
+        while(sum >= target){      
+            // maxLen = Math.min(maxLen, right - left + 1) 
+            // sum = sum - nums[left]
+            // left++
+
+            maxLen = right - left + 1
             left++
+            sum = sum - nums[left-1]
         }
     }
 

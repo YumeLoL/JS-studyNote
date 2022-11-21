@@ -9,6 +9,9 @@
 
 var nums = [0, 1, 2, 2, 3, 0, 4, 2], val = 2;
 
+
+// 解法：快慢指针
+// 需要双指针，否则会遗漏
 var removeElement = (nums, val) => {
   // 1. set i and j, i is fast pointer points and j is slow pointer points to the index of new array
   let j = 0;
