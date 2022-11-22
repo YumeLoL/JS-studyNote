@@ -136,7 +136,7 @@ console.log('quick sort',quickSort(nums))
 
 
 
-/
+
 // Merge Sort 归并排序
 // function merge_sort(arr){
 //     if(arr.length < 2){
